@@ -27,6 +27,10 @@
     letter-spacing: 3px;
     color: #198754;
   }
+  .dominant {
+    color: #198754;
+    font-weight: 700;
+  }
 </style>
 </head>
 <body>
@@ -39,7 +43,10 @@
 
   <hr>
 
-  <p class="fw-semibold mb-1">Great job! You cracked the password. Please fill in your Student ID and Full Name below to submit your result.</p>
+  <p class="mb-1">
+    <span class="dominant">Great job! You cracked the password.</span>
+    <span class="fw-semibold">Please fill in your Student ID and Full Name below to submit your result.</span>
+  </p>
   <p class="text-muted small">เยี่ยมมาก! คุณถอดรหัสผ่านสำเร็จแล้ว กรุณากรอกรหัสนักศึกษาและชื่อ-นามสกุลด้านล่างเพื่อบันทึกผลการทำแล็บ</p>
 
   {% if error %}
