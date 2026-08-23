@@ -37,6 +37,18 @@ app.add_middleware(
 
 templates = Jinja2Templates(directory=BASE_DIR / "templates")
 
+
+@app.middleware("http")
+async def no_store_cache_headers(request: Request, call_next):
+    """Every page here reflects one-time session state (logged in, already
+    submitted, admin authenticated). Without this, a browser can restore a
+    stale copy of a protected page via the back/forward cache after the
+    underlying session has changed or been cleared."""
+    response = await call_next(request)
+    response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    return response
+
 USERNAME_RE = re.compile(r"^[A-Za-z0-9_.\-]{1,64}$")
 STUDENT_ID_RE = re.compile(r"^[0-9]{5,20}$")
 MAX_PASSWORD_LEN = 128
